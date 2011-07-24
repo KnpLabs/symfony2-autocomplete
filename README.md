@@ -28,6 +28,8 @@ Add a `source` command at the end:
 
 **Linux:**
 
+*`bash-completion` must be installed.*
+
     cp symfony2-autocomplete.bash /etc/bash_completion.d/
 
 Add the following line to your `~/.bashrc` or `.bash_profile`:
