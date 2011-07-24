@@ -5,7 +5,7 @@
 # Copyright (C) 2011 Matthieu Bontemps <matthieu@knplabs.com>
 # Distributed under the GNU General Public License, version 2.0.
 
-_console() 
+_console()
 {
     local cur prev opts cmd
     COMPREPLY=()
@@ -19,11 +19,9 @@ $ret = explode("\n", $ret);
 
 $base = "";
 $comps = array();
-foreach($ret as $line) {
-    if(preg_match("@^  ([^ ]+) @", $line, $m)) {
+foreach ($ret as $line) {
+    if (preg_match("@^  ([^ ]+) @", $line, $m)) {
         $comps[] = $base.$m[1];
-    } else {
-        $base = $line;
     }
 }
 
@@ -35,7 +33,7 @@ echo $comps;
     return 0
 }
 
-complete -F _console console 
+complete -F _console console
 complete -F _console console-dev
 complete -F _console console-test
 complete -F _console console-prod
