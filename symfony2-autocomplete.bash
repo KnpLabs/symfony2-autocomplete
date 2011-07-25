@@ -17,16 +17,14 @@ _console()
 $ret = preg_replace("/^.*Available commands:\n/s", "", $ret);
 $ret = explode("\n", $ret);
 
-$base = "";
 $comps = array();
 foreach ($ret as $line) {
     if (preg_match("@^  ([^ ]+) @", $line, $m)) {
-        $comps[] = $base.$m[1];
+        $comps[] = $m[1];
     }
 }
 
-$comps = implode("\n", $comps);
-echo $comps;
+echo implode("\n", $comps);
 '
     possible=$($(which php) -r "$PHP" $COMP_WORDS);
     COMPREPLY=( $(compgen -W "${possible}" -- ${cur}) )
