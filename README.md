@@ -32,12 +32,6 @@ Add a `source` command at the end:
 
     cp symfony2-autocomplete.bash /etc/bash_completion.d/
 
-Add the following line to your `~/.bashrc` or `.bash_profile`:
-
-    if [ -e ~/symfony2-autocomplete.bash ]; then
-        . ~/symfony2-autocomplete.bash
-    fi
-
 Restart your bash and you should be able to autocomplete in a Symfony2 project:
 
     ./app/console doc[TAB]
