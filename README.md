@@ -14,7 +14,7 @@ Download the `symfony2-autocomplete.bash`.
 For example, if you want to be able to pull the changes in the future:
 
     cd ~/Sites/
-    git clone https://github.com/knplabs/symfony2-autocomplete
+    git clone https://github.com/KnpLabs/symfony2-autocomplete
 
 Now edit your `bashrc`.
 
