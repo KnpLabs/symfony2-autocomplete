@@ -21,6 +21,7 @@ $command = '';
 foreach ($argv as $v) {
     if (0 !== strpos($v, '-')) {
         $command = $v;
+        break;
     }
 }
 
