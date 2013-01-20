@@ -27,7 +27,7 @@ foreach ($argv as $v) {
 $xmlHelp = shell_exec($script.' help --xml '.$command);
 $options = array();
 if (!$xml = @simplexml_load_string($xmlHelp)) {
-    return;
+    exit(0);
 }
 foreach ($xml->xpath('/command/options/option') as $option) {
     $options[] = (string) $option['name'];
