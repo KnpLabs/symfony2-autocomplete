@@ -44,12 +44,8 @@ HEREDOC
         return 0
     fi
 
-    if [[ ${COMP_CWORD} = 1 ]] ; then
-        commands=$(${script} list --raw | sed -E 's/(([^ ]+ )).*/\1/')
-        COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
-
-        return 0
-    fi
+    commands=$(${script} list --raw | sed -E 's/(([^ ]+ )).*/\1/')
+    COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
 
     return 0;
 }
