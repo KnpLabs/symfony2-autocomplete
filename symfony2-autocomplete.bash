@@ -15,7 +15,8 @@ _console()
     PHP='$ret = shell_exec($argv[1] . " --no-debug --env=prod");
 
 $comps = "";
-if (preg_match_all("@^.*Available commands:\n^  ([^ ]+) @m", $ret, $m)) {
+$ret = preg_replace("/^.*Available commands:\n/s", "", $ret);
+if (preg_match_all("@^  ([^ ]+) @m", $ret, $m)) {
     $comps = $m[1];
 }
 
