@@ -7,48 +7,24 @@
 
 _console()
 {
-    local cur prev script
+    local cur prev cmd
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    script="${COMP_WORDS[0]}"
+    cmd="${COMP_WORDS[0]}"
+    PHP='$ret = shell_exec($argv[1] . " --no-debug --env=prod");
 
-    if [[ ${cur} == -* ]] ; then
-        PHP=$(cat <<'HEREDOC'
-array_shift($argv);
-$script = array_shift($argv);
-$command = '';
-foreach ($argv as $v) {
-    if (0 !== strpos($v, '-')) {
-        $command = $v;
-        break;
-    }
+$comps = "";
+$ret = preg_replace("/^.*Available commands:\n/s", "", $ret);
+if (preg_match_all("@^  ([^ ]+) @m", $ret, $m)) {
+    $comps = $m[1];
 }
 
-$xmlHelp = shell_exec($script.' help --xml '.$command);
-$options = array();
-if (!$xml = @simplexml_load_string($xmlHelp)) {
-    exit(0);
-}
-foreach ($xml->xpath('/command/options/option') as $option) {
-    $options[] = (string) $option['name'];
-}
-
-echo implode(' ', $options);
-HEREDOC
-)
-
-        args=$(printf "%s " "${COMP_WORDS[@]}")
-        options=$($(which php) -r "$PHP" ${args});
-        COMPREPLY=($(compgen -W "${options}" -- ${cur}))
-
-        return 0
-    fi
-
-    commands=$(${script} list --raw | sed -E 's/(([^ ]+ )).*/\1/')
-    COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
-
-    return 0;
+echo implode("\n", $comps);
+'
+    possible=$($(which php) -r "$PHP" $COMP_WORDS);
+    COMPREPLY=( $(compgen -W "${possible}" -- ${cur}) )
+    return 0
 }
 
 complete -F _console console
