@@ -7,13 +7,15 @@
 
 _console()
 {
-    local cur prev cmd
+    local cur prev opts
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    cmd="${COMP_WORDS[0]}"
-    COMMANDS=$(${1} | sed '1,/.*Available commands/d' | grep -o '^  .*  ')
-    COMPREPLY=($(compgen -W "${COMMANDS}" -- ${cur}))
+
+    _get_comp_words_by_ref -n : cur prev
+
+    opts=$(${1} | sed '1,/.*Available commands/d' | grep -o '^  .*  ')
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+
+    __ltrim_colon_completions "$cur"
     return 0
 }
 
