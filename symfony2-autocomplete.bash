@@ -5,7 +5,7 @@
 # Copyright (C) 2011 Matthieu Bontemps <matthieu@knplabs.com>
 # Distributed under the GNU General Public License, version 2.0.
 
-_console()
+_symfony2_console()
 {
     local cur prev opts
     COMPREPLY=()
@@ -19,10 +19,4 @@ _console()
     return 0
 }
 
-complete -F _console console
-complete -F _console console-dev
-complete -F _console console-test
-complete -F _console console-prod
-complete -F _console console-staging
-complete -F _console Symfony
-COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+complete -F _symfony2_console app/console
