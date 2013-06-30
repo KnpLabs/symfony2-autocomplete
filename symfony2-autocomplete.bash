@@ -12,18 +12,8 @@ _console()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
     cmd="${COMP_WORDS[0]}"
-    PHP='$ret = shell_exec($argv[1] . " --no-debug --env=prod");
-
-$comps = "";
-$ret = preg_replace("/^.*Available commands:\n/s", "", $ret);
-if (preg_match_all("@^  ([^ ]+) @m", $ret, $m)) {
-    $comps = $m[1];
-}
-
-echo implode("\n", $comps);
-'
-    possible=$($(which php) -r "$PHP" $COMP_WORDS);
-    COMPREPLY=( $(compgen -W "${possible}" -- ${cur}) )
+    COMMANDS=$(${1} | sed '1,/.*Available commands/d' | grep -o '^  .*  ')
+    COMPREPLY=($(compgen -W "${COMMANDS}" -- ${cur}))
     return 0
 }
 
