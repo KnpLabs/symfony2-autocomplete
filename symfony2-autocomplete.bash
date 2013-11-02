@@ -5,32 +5,18 @@
 # Copyright (C) 2011 Matthieu Bontemps <matthieu@knplabs.com>
 # Distributed under the GNU General Public License, version 2.0.
 
-_console()
+_symfony2_console()
 {
-    local cur prev cmd
+    local cur prev opts
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    cmd="${COMP_WORDS[0]}"
-    PHP='$ret = shell_exec($argv[1] . " --no-debug --env=prod");
 
-$comps = "";
-$ret = preg_replace("/^.*Available commands:\n/s", "", $ret);
-if (preg_match_all("@^  ([^ ]+) @m", $ret, $m)) {
-    $comps = $m[1];
-}
+    _get_comp_words_by_ref -n : cur prev
 
-echo implode("\n", $comps);
-'
-    possible=$($(which php) -r "$PHP" $COMP_WORDS);
-    COMPREPLY=( $(compgen -W "${possible}" -- ${cur}) )
+    opts=$(${1} | grep -o -P '\w+:.+?\s')
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+
+    __ltrim_colon_completions "$cur"
     return 0
 }
 
-complete -F _console console
-complete -F _console console-dev
-complete -F _console console-test
-complete -F _console console-prod
-complete -F _console console-staging
-complete -F _console Symfony
-COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+complete -F _symfony2_console app/console

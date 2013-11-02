@@ -5,7 +5,6 @@ This is a very simple script to autocomplete symfony2 commands in a bash shell.
 It easier to install than the KnplabsSymfony2AutocompleteBundle because it is only a single file.
 No need to change anything in your Symfony2 project.
 
-The script itself is not nice (you'll discover some PHP inside ) - but it gets the job done and could be useful to some people.
 
 ## Install
 
