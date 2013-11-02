@@ -12,7 +12,7 @@ _symfony2_console()
 
     _get_comp_words_by_ref -n : cur prev
 
-    opts=$(${1} | sed '1,/.*Available commands/d' | grep -o '^  .*  ')
+    opts=$(${1} | grep -o -P '\w+:.+?\s'
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 
     __ltrim_colon_completions "$cur"
