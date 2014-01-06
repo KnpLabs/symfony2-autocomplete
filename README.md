@@ -41,3 +41,12 @@ Add the following line to your `~/.bashrc` or `.bash_profile`:
 Restart your bash and you should be able to autocomplete in a Symfony2 project:
 
     ./app/console doc[TAB]
+
+
+##Extra
+
+It also contains a `symfony` script, which can be used to call synfomy console from child directories too.
+
+Add the `bin` folder to your ___$PATH___ or symlink the script to bin folder.
+	
+	ln -s `pwd`/bin/symfony /usr/local/bin/symfony
