@@ -1,3 +1,7 @@
+## Not actively maintained
+
+This project is not actively maintained by KnpLabs. Please contact us if you would like to take over.
+
 # Symfony2 autocomplete
 
 This is a very simple script to autocomplete symfony2 commands in a bash shell.
