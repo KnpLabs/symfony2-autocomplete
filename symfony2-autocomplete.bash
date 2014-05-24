@@ -9,8 +9,7 @@ _console()
 {
     local cur prev script
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    _get_comp_words_by_ref -n : cur prev
     script="${COMP_WORDS[0]}"
 
     if [[ ${cur} == -* ]] ; then
@@ -48,6 +47,7 @@ HEREDOC
     commands=$(${script} list --raw | sed -E 's/(([^ ]+ )).*/\1/')
     COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
 
+    __ltrim_colon_completions "$cur"
     return 0;
 }
 
@@ -57,4 +57,3 @@ complete -F _console console-test
 complete -F _console console-prod
 complete -F _console console-staging
 complete -F _console Symfony
-COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
