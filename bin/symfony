@@ -1,0 +1,15 @@
+#!/bin/bash
+# From https://gist.github.com/masnun/8271570 by Abu Ashraf Masnun
+
+# Expand globs to null when there are no matches
+shopt -s nullglob
+
+# Look for either a '<subdir>/console' or a 'symfony' file
+until
+        file=(*/console symfony); [[ -f "$file" ]] && "$file" "$@" && exit 0;
+do
+        [[ "$PWD" == "/" ]] && break;
+        cd ..
+done
+echo 'Not a symfony project' 1>&2
+exit 1
