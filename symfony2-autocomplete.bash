@@ -25,7 +25,7 @@ foreach ($argv as $v) {
     }
 }
 
-$xmlHelp = shell_exec($script.' help --xml '.$command);
+$xmlHelp = shell_exec($script.' help --format=xml '.$command);
 $options = array();
 if (!$xml = @simplexml_load_string($xmlHelp)) {
     exit(0);
