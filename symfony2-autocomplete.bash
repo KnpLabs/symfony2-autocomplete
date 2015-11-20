@@ -25,7 +25,7 @@ foreach ($argv as $v) {
     }
 }
 
-$xmlHelp = shell_exec($script.' help --format=xml '.$command);
+$xmlHelp = shell_exec($script.' help --format=xml '.$command.' 2>/dev/null');
 $options = array();
 if (!$xml = @simplexml_load_string($xmlHelp)) {
     exit(0);
@@ -45,7 +45,7 @@ HEREDOC
         return 0
     fi
 
-    commands=$(${script} list --raw | sed -E 's/(([^ ]+ )).*/\1/')
+    commands=$(${script} list --raw 2>/dev/null | sed -E 's/(([^ ]+ )).*/\1/')
     COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
 
     return 0;
@@ -59,4 +59,5 @@ complete -F _console console-staging
 complete -F _console Symfony
 complete -F _console sf
 complete -F _console console.php
+complete -F _console composer
 COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
